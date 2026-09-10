@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 
 /**
  * Factory for creating polymorphic User domain entities based on user role.
- * Implements the Factory Method / Static Factory pattern to encapsulate subclass instantiation.
+ * Implements the GoF Factory Method / Static Factory pattern to decouple subclass
+ * instantiation (AdminUser vs ReaderUser) from persistence and business services.
  */
 public class UserFactory {
 

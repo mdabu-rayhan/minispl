@@ -224,6 +224,9 @@ public class SQLiteBookDAO implements BookDAO {
         return 0;
     }
 
+    /**
+     * Maps database row to Book entity utilizing the Book.Builder pattern.
+     */
     private Book mapResultSetToBook(ResultSet rs, boolean loadBlob) throws SQLException {
         int id = rs.getInt("id");
         String title = rs.getString("title");
