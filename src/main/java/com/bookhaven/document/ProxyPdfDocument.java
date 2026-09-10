@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 /**
  * Virtual Proxy in the Virtual Proxy pattern.
  * Holds lightweight book metadata and defers raw PDF byte fetching and PDFBox parsing until needed.
+ * Ensures minimal memory overhead when browsing large catalog collections.
  */
 public class ProxyPdfDocument implements BookDocument {
 
@@ -32,6 +33,7 @@ public class ProxyPdfDocument implements BookDocument {
 
     /**
      * Lazily loads the RealPdfDocument from the database if not already loaded.
+     * Thread-safe synchronized access ensures only a single PDDocument instance is parsed.
      */
     private synchronized void ensureLoaded() {
         if (realPdfDocument == null) {
@@ -41,6 +43,8 @@ public class ProxyPdfDocument implements BookDocument {
                 Optional<byte[]> optionalBytes = bookDAO.getPdfBytes(bookId);
                 if (optionalBytes.isPresent()) {
                     bytes = optionalBytes.get();
+                } else {
+                    LOGGER.warning("Virtual Proxy: No PDF bytes found in database for book ID " + bookId);
                 }
             }
             this.realPdfDocument = new RealPdfDocument(bookId, title, fileSize, bytes);
@@ -94,6 +98,13 @@ public class ProxyPdfDocument implements BookDocument {
             realPdfDocument.close();
             realPdfDocument = null;
         }
+    }
+
+    /**
+     * Explicitly unloads the underlying RealPdfDocument to release heavy PDFBox memory.
+     */
+    public synchronized void unload() {
+        close();
     }
 
     /**
