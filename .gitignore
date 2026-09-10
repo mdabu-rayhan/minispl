@@ -84,9 +84,16 @@ $RECYCLE.BIN/
 *.md
 **/*.md
 
-# Keep only README.md and DESIGN_PATTERNS.md
+# Keep documentation files
 !README.md
 !readme.md
 !DESIGN_PATTERNS.md
 !design_patterns.md
+!TECHNICAL_DOCUMENTATION.md
+!technical_documentation.md
+!CHANGELOG.md
+!changelog.md
+!docs/
+!docs/**
+
 

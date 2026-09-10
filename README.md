@@ -177,8 +177,9 @@ mvn clean test
 
 ## 📚 Project Documentation
 
-Detailed architecture specifications and oral defense guides are included in the repository:
+Detailed architecture specifications, complete technical reports, and oral defense guides are included in the repository:
 
+- **[TECHNICAL_DOCUMENTATION.md](TECHNICAL_DOCUMENTATION.md):** Master technical documentation covering problem analysis, SQLite ER schema, workflows, analytical queries, design pattern justifications, and testing.
 - **[DESIGN_PATTERNS.md](DESIGN_PATTERNS.md):** Complete architectural design pattern reference with UML class diagrams and code snippets.
 - **[docs/DESIGN_PATTERNS_DEFENSE.md](docs/DESIGN_PATTERNS_DEFENSE.md):** Practical viva voce examination guide with conversational questions, answers, and justifications.
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):** Database Entity-Relationship (ER) diagram and Mermaid class specifications.
