@@ -32,7 +32,7 @@
 
 ## 📖 About the Project
 
-### What is BookHaven? (In Plain English)
+### What is BookHaven?
 
 **BookHaven** is a personal digital library and PDF reader for your desktop computer. Think of it like a personal, offline version of **Kindle** or **Calibre**, designed to be simple, responsive, and easy to use.
 
