@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 /**
  * Multi-step Admin Ingestion Pipeline service for validating, parsing, and storing PDF books into SQLite.
+ * Leverages the GoF Builder pattern for safe, stepwise construction of Book entities from parsed metadata.
  */
 public class BookIngestionService {
 

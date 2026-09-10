@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 /**
  * Domain entity representing a Book in the library catalog.
+ * Implements the GoF Builder Pattern to streamline multi-attribute instantiation
+ * with sensible defaults, immutability protection, and virtual proxy attachment.
  */
 public class Book {
 
@@ -44,6 +46,7 @@ public class Book {
 
     /**
      * Builder class for constructing Book instances with optional and mandatory attributes.
+     * Follows the GoF Creational Builder design pattern.
      */
     public static class Builder {
         private int id = 0;

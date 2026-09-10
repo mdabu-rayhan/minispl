@@ -26,7 +26,7 @@ public abstract class User {
 
     /**
      * Factory method to create appropriate User subtype based on role.
-     * Delegates to UserFactory.
+     * Implements GoF Factory Method pattern by delegating to UserFactory.
      */
     public static User create(int id, String username, String passwordHash, UserRole role, LocalDateTime createdAt) {
         return UserFactory.createUser(id, username, passwordHash, role, createdAt);

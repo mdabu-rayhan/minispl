@@ -149,6 +149,9 @@ public class SQLiteUserDAO implements UserDAO {
         return 0;
     }
 
+    /**
+     * Maps database row to polymorphic User instance utilizing UserFactory.
+     */
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String username = rs.getString("username");
