@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookhaven.controller.LoginController">
+    <!-- Top Header -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16.0" style="-fx-padding: 16px 24px; -fx-background-color: #f3f4f6; -fx-border-color: #d1d5db; -fx-border-width: 0 0 1px 0;">
+            <VBox spacing="2.0">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="📖 BookHaven" />
+                <Label style="-fx-font-size: 12px; -fx-text-fill: #4b5563;" text="Desktop Library &amp; E-Reader System" />
+            </VBox>
+        </HBox>
+    </top>
+
+    <!-- Center Content -->
+    <center>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+
+            <!-- Main Auth Card -->
+            <VBox maxWidth="450.0" spacing="16.0" style="-fx-background-color: #ffffff; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 6px; -fx-padding: 24px;">
+                <VBox spacing="4.0">
+                    <Label fx:id="formTitleLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Sign In to BookHaven" />
+                    <Label fx:id="formSubtitleLabel" style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="Enter your account credentials to access your library." />
+                </VBox>
+
+                <VBox spacing="4.0">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Username" />
+                    <TextField fx:id="usernameField" promptText="Enter username (e.g. admin or reader1)" />
+                </VBox>
+
+                <VBox spacing="4.0">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Password" />
+                    <PasswordField fx:id="passwordField" onAction="#handlePrimaryAction" promptText="Enter password" />
+                </VBox>
+
+                <!-- Registration specific field (hidden by default) -->
+                <VBox fx:id="confirmPasswordBox" managed="false" spacing="4.0" visible="false">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Confirm Password" />
+                    <PasswordField fx:id="confirmPasswordField" onAction="#handlePrimaryAction" promptText="Re-enter password" />
+                </VBox>
+
+                <!-- Status / Error Message -->
+                <Label fx:id="messageLabel" minHeight="18.0" style="-fx-font-weight: bold; -fx-font-size: 12px;" text="" wrapText="true" />
+
+                <!-- Action Buttons -->
+                <VBox spacing="8.0">
+                    <Button fx:id="primaryActionButton" maxWidth="Infinity" onAction="#handlePrimaryAction" text="Sign In" />
+                    <Button fx:id="toggleModeButton" maxWidth="Infinity" onAction="#handleToggleMode" text="Need an account? Register as Reader" />
+                </VBox>
+            </VBox>
+
+            <!-- Quick Demo Credentials Box -->
+            <VBox maxWidth="450.0" spacing="8.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 6px; -fx-padding: 12px 16px;">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #4b5563; -fx-font-size: 11px;" text="QUICK DEMO CREDENTIALS (Pre-seeded in SQLite):" />
+                <HBox spacing="10.0">
+                    <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#fillAdminCredentials" style="-fx-font-size: 11px;" text="Admin (admin / admin123)" />
+                    <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#fillReaderCredentials" style="-fx-font-size: 11px;" text="Reader (reader1 / reader123)" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

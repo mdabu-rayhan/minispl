@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookhaven.controller.BookCatalogController">
+    <!-- Left Navigation Sidebar -->
+    <left>
+        <VBox prefWidth="250.0" spacing="16.0" style="-fx-background-color: #f3f4f6; -fx-border-color: #d1d5db; -fx-border-width: 0 1px 0 0; -fx-padding: 20px 16px;">
+            <!-- Brand Logo & Subtitle -->
+            <VBox spacing="2.0">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="📖 BookHaven" />
+                <Label style="-fx-font-size: 11px; -fx-text-fill: #4b5563;" text="DIGITAL LIBRARY &amp; READER" />
+            </VBox>
+
+            <Separator />
+
+            <!-- Navigation Filter Buttons -->
+            <VBox spacing="6.0">
+                <Label style="-fx-font-size: 11px; -fx-text-fill: #6b7280; -fx-font-weight: bold;" text="LIBRARY VIEWS" />
+                <Button fx:id="allBooksButton" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleFilterAll" text="📚 All Books" />
+                <Button fx:id="currentlyReadingButton" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleFilterReading" text="📖 Currently Reading" />
+                <Button fx:id="completedButton" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleFilterCompleted" text="✅ Completed" />
+            </VBox>
+
+            <Separator />
+
+            <!-- Personal Reading Stats Card -->
+            <VBox spacing="8.0" style="-fx-background-color: #ffffff; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 12px;">
+                <Label style="-fx-font-size: 11px; -fx-text-fill: #4b5563; -fx-font-weight: bold;" text="READING METRICS" />
+
+                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                    <Label style="-fx-font-size: 16px;" text="⏱️" />
+                    <VBox>
+                        <Label fx:id="totalHoursLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="0.0 hrs" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="TOTAL TIME" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                    <Label style="-fx-font-size: 16px;" text="📅" />
+                    <VBox>
+                        <Label fx:id="monthHoursLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="0.0 hrs" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="THIS MONTH" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                    <Label style="-fx-font-size: 16px;" text="🎯" />
+                    <VBox>
+                        <HBox spacing="4.0">
+                            <Label fx:id="completedBooksLabel" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="0" />
+                            <Label style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="done •" />
+                            <Label fx:id="activeBooksLabel" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="0" />
+                            <Label style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="active" />
+                        </HBox>
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="COMPLETED / ACTIVE" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- User Profile & Sign Out -->
+            <VBox spacing="8.0" style="-fx-background-color: #ffffff; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 10px;">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <Label style="-fx-font-size: 14px;" text="👤" />
+                    <Label fx:id="userGreetingLabel" style="-fx-font-weight: bold;" text="reader1" />
+                </HBox>
+                <Button maxWidth="Infinity" onAction="#handleLogout" text="Sign Out" />
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox spacing="14.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+
+            <!-- Top Filter & Search Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: #ffffff; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 10px 14px;">
+                <TextField fx:id="searchField" minWidth="220.0" prefWidth="300.0" promptText="Search library by title or author..." HBox.hgrow="ALWAYS" />
+
+                <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Genre:" />
+                <ComboBox fx:id="genreComboBox" minWidth="130.0" prefWidth="150.0" promptText="All Genres" />
+
+                <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Sort Strategy:" />
+                <ComboBox fx:id="sortStrategyComboBox" minWidth="160.0" prefWidth="180.0" />
+
+                <Button onAction="#handleResetFilters" text="Reset" />
+            </HBox>
+
+            <!-- Section Title & Results Counter -->
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <VBox spacing="2.0">
+                    <Label fx:id="catalogSectionTitleLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="My Library" />
+                    <Label fx:id="resultsCountLabel" style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="Showing 3 books" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <!-- Book Cards Scroll Grid -->
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                <FlowPane fx:id="booksFlowPane" hgap="16.0" vgap="16.0" />
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>
