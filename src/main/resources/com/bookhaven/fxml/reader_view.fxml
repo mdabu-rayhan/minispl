@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="800.0" prefWidth="1100.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookhaven.controller.ReaderViewController">
+    <!-- Top Reader Toolbar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14.0" style="-fx-padding: 10px 16px; -fx-background-color: #f3f4f6; -fx-border-color: #d1d5db; -fx-border-width: 0 0 1px 0;">
+            <Button onAction="#handleBackToCatalog" text="⬅ Library Catalog" />
+
+            <Separator orientation="VERTICAL" />
+
+            <VBox spacing="2.0">
+                <Label fx:id="bookTitleLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Book Title" />
+                <Label fx:id="bookAuthorLabel" style="-fx-font-size: 11px; -fx-text-fill: #4b5563;" text="By Author" />
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Page Navigation -->
+            <HBox alignment="CENTER" spacing="8.0">
+                <Button fx:id="prevPageButton" onAction="#handlePrevPage" text="◀ Prev" />
+                <Label fx:id="pageIndicatorLabel" alignment="CENTER" minWidth="100.0" style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Page 1 of 1" />
+                <Button fx:id="nextPageButton" onAction="#handleNextPage" text="Next ▶" />
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Zoom Controls -->
+            <HBox alignment="CENTER" spacing="6.0">
+                <Button onAction="#handleZoomOut" text="➖" />
+                <Label fx:id="zoomLevelLabel" alignment="CENTER" minWidth="45.0" style="-fx-font-weight: bold; -fx-font-size: 12px;" text="125%" />
+                <Button onAction="#handleZoomIn" text="➕" />
+                <Button onAction="#handleResetZoom" text="↺ Reset" />
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- Center Canvas / ScrollPane for Rendered PDF Image -->
+    <center>
+        <ScrollPane fx:id="pdfScrollPane" fitToHeight="true" fitToWidth="true" pannable="true" style="-fx-background-color: #374151; -fx-background: #374151;">
+            <StackPane alignment="CENTER" style="-fx-padding: 20px;">
+                <ImageView fx:id="pdfImageView" preserveRatio="true" smooth="true" />
+            </StackPane>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="800.0" prefWidth="1180.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookhaven.controller.AdminDashboardController">
+    <!-- Top Header -->
+    <top>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #f3f4f6; -fx-padding: 14px 24px; -fx-border-color: #d1d5db; -fx-border-width: 0 0 1px 0;">
+                <VBox spacing="2.0">
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="📖 BookHaven Admin Portal" />
+                    <Label style="-fx-font-size: 11px; -fx-text-fill: #4b5563;" text="Library Ingestion, Catalog Control &amp; System Analytics" />
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <!-- Admin Info & Logout -->
+                <HBox alignment="CENTER_RIGHT" spacing="12.0">
+                    <Label fx:id="adminGreetingLabel" style="-fx-font-weight: bold; -fx-font-size: 12px;" text="Administrator: admin" />
+                    <Button onAction="#handleLogout" text="Sign Out" />
+                </HBox>
+            </HBox>
+
+            <!-- Aggregate Analytics Strip -->
+            <HBox alignment="CENTER_LEFT" spacing="14.0" style="-fx-background-color: #ffffff; -fx-padding: 14px 24px; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1px 0;">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 8px 14px;">
+                    <Label style="-fx-font-size: 20px;" text="👥" />
+                    <VBox spacing="2.0">
+                        <Label fx:id="totalUsersLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="0" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="TOTAL USERS" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 8px 14px;">
+                    <Label style="-fx-font-size: 20px;" text="📚" />
+                    <VBox spacing="2.0">
+                        <Label fx:id="totalBooksLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="0" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="CATALOG BOOKS" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 8px 14px;">
+                    <Label style="-fx-font-size: 20px;" text="💾" />
+                    <VBox spacing="2.0">
+                        <Label fx:id="totalStorageLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="0 MB" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="BLOB STORAGE" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 8px 14px;">
+                    <Label style="-fx-font-size: 20px;" text="📄" />
+                    <VBox spacing="2.0">
+                        <Label fx:id="totalPagesReadLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="0" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="TOTAL PAGES READ" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 8px 14px;">
+                    <Label style="-fx-font-size: 20px;" text="⏱️" />
+                    <VBox spacing="2.0">
+                        <Label fx:id="totalReadingHoursLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="0.0 hrs" />
+                        <Label style="-fx-font-size: 10px; -fx-text-fill: #6b7280;" text="READING LOGGED" />
+                    </VBox>
+                </HBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center Workspace Tabs -->
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <!-- TAB 1: Ingest New Book -->
+            <Tab text="📥 Ingest New Book">
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                    <VBox spacing="16.0">
+                        <padding>
+                            <Insets bottom="24.0" left="28.0" right="28.0" top="20.0" />
+                        </padding>
+
+                        <VBox maxWidth="700.0" spacing="16.0" style="-fx-background-color: #ffffff; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 20px;">
+                            <VBox spacing="4.0">
+                                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Book Ingestion Pipeline" />
+                                <Label style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="Upload a PDF file. The engine validates the document, parses page metadata, and stores it in the database." wrapText="true" />
+                            </VBox>
+
+                            <!-- Step 1: File Selection -->
+                            <VBox spacing="6.0" style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-padding: 12px;">
+                                <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="1. Select Document File (.pdf)" />
+                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <Button onAction="#handleSelectPdfFile" text="📁 Choose PDF Document..." />
+                                    <Label fx:id="selectedFileLabel" style="-fx-font-size: 12px; -fx-text-fill: #4b5563;" text="No file selected yet" />
+                                </HBox>
+                            </VBox>
+
+                            <!-- Step 2: Book Metadata -->
+                            <VBox spacing="8.0">
+                                <Label style="-fx-font-weight: bold; -fx-font-size: 12px;" text="2. Catalog Metadata &amp; Categorization" />
+                                <GridPane hgap="12.0" vgap="12.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="110.0" prefWidth="120.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" />
+                                    </columnConstraints>
+
+                                    <Label style="-fx-font-weight: bold;" text="Book Title:" GridPane.rowIndex="0" />
+                                    <TextField fx:id="ingestTitleField" promptText="e.g. Clean Architecture Handbook" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                    <Label style="-fx-font-weight: bold;" text="Author:" GridPane.rowIndex="1" />
+                                    <TextField fx:id="ingestAuthorField" promptText="e.g. Robert C. Martin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                    <Label style="-fx-font-weight: bold;" text="Genre:" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="ingestGenreComboBox" editable="true" maxWidth="Infinity" promptText="Select or type genre (e.g. Technology)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                    <Label style="-fx-font-weight: bold;" text="Description:" GridPane.rowIndex="3" />
+                                    <TextArea fx:id="ingestDescriptionArea" prefRowCount="3" promptText="Synopsis or overview of the book..." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                </GridPane>
+                            </VBox>
+
+                            <!-- Ingest Status / Output -->
+                            <Label fx:id="ingestMessageLabel" minHeight="20.0" style="-fx-font-weight: bold;" text="" wrapText="true" />
+
+                            <!-- Execute Pipeline Button -->
+                            <Button fx:id="executeIngestButton" maxWidth="Infinity" onAction="#handleExecuteIngest" text="🚀 Ingest &amp; Store in Library Catalog" />
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- TAB 2: Catalog Management (CRUD) -->
+            <Tab text="📚 Catalog Management">
+                <VBox spacing="14.0">
+                    <padding>
+                        <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                    </padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <VBox spacing="2.0">
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Library Catalog CRUD Management" />
+                            <Label style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="Edit metadata or remove books from the digital library." />
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button onAction="#refreshCatalogTable" text="🔄 Refresh" />
+                        <Button onAction="#handleEditSelectedBook" text="✏️ Edit Metadata" />
+                        <Button onAction="#handleDeleteSelectedBook" text="🗑️ Delete Book" />
+                    </HBox>
+
+                    <TableView fx:id="catalogTableView" VBox.vgrow="ALWAYS">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="colBookId" minWidth="45.0" prefWidth="50.0" text="ID" />
+                            <TableColumn fx:id="colBookTitle" minWidth="220.0" prefWidth="280.0" text="Title" />
+                            <TableColumn fx:id="colBookAuthor" minWidth="150.0" prefWidth="180.0" text="Author" />
+                            <TableColumn fx:id="colBookGenre" minWidth="110.0" prefWidth="130.0" text="Genre" />
+                            <TableColumn fx:id="colBookPages" minWidth="70.0" prefWidth="80.0" text="Pages" />
+                            <TableColumn fx:id="colBookSize" minWidth="80.0" prefWidth="90.0" text="Size" />
+                            <TableColumn fx:id="colBookDate" minWidth="130.0" prefWidth="150.0" text="Added Date" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB 3: User Management -->
+            <Tab text="👥 Registered Users &amp; Roles">
+                <VBox spacing="14.0">
+                    <padding>
+                        <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                    </padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <VBox spacing="2.0">
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="User Accounts &amp; Permissions" />
+                            <Label style="-fx-text-fill: #6b7280; -fx-font-size: 12px;" text="Monitor registered readers and system administrators." />
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button onAction="#refreshUsersTable" text="🔄 Refresh Users" />
+                        <Button onAction="#handleDeleteSelectedUser" text="🗑️ Remove User Account" />
+                    </HBox>
+
+                    <TableView fx:id="usersTableView" VBox.vgrow="ALWAYS">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="colUserId" minWidth="45.0" prefWidth="50.0" text="ID" />
+                            <TableColumn fx:id="colUsername" minWidth="200.0" prefWidth="250.0" text="Username" />
+                            <TableColumn fx:id="colUserRole" minWidth="120.0" prefWidth="150.0" text="Role" />
+                            <TableColumn fx:id="colUserCreated" minWidth="160.0" prefWidth="200.0" text="Registration Date" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,5 @@
+/* Standard Minimal JavaFX Stylesheet */
+.root {
+    -fx-font-family: 'Segoe UI', -apple-system, sans-serif;
+    -fx-font-size: 13px;
+}
